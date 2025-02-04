@@ -31,7 +31,16 @@ initial_investment = 170000  # $170,000
 
 # Download historical data for S&P 500 sectors
 symbols = list(set([symbol for sector in sector_allocations for symbol in sector_allocations[sector]]))
-data = yf.download(symbols, start=start_date, end=end_date)['Adj Close']
+try:
+    data = yf.download(symbols, start=start_date, end=end_date)
+    # Try Adj Close first, fall back to Close if not available
+    if 'Adj Close' in data.columns:
+        data = data['Adj Close']
+    else:
+        data = data['Close']
+except Exception as e:
+    print(f"Error downloading data: {e}")
+
 data
 # Determine rebalancing date as the end of the previous quarter
 rebalancing_date = pd.Timestamp.today() - pd.tseries.offsets.QuarterEnd()

@@ -2,20 +2,129 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* Add black background to html and body */
+html, body {
+  background-color: black;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@layer utilities {
+  .animate-scroll-up {
+    animation: scroll-up 180s linear infinite;
+  }
+
+  .animate-scroll-reverse {
+    animation: scroll-reverse 180s linear infinite;
+  }
+
+  .animate-fade-in {
+    animation: fade-in 1s ease-out forwards;
+  }
+
+  .animate-slide-up {
+    animation: slide-up 0.8s ease-out forwards;
+  }
+
+  .animate-scale-in {
+    animation: scale-in 0.6s ease-out forwards;
+  }
+
+  .animate-spin-slow {
+    animation: spin 4s linear infinite;
+  }
+
+  .animate-spin {
+    animation: spin 1s linear infinite;
+  }
+
+  .animate-morph {
+    animation: morph 2s ease-in-out infinite;
+  }
+
+  .animate-reveal {
+    animation: reveal 0.8s cubic-bezier(0.2, 0, 0.2, 1) forwards;
+  }
+
+  .animate-reveal-x {
+    animation: reveal-x 0.8s cubic-bezier(0.2, 0, 0.2, 1) forwards;
+  }
+
+  .animate-expand {
+    animation: expand 3s ease-out infinite;
   }
 }
 
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+@keyframes scroll-up {
+  from { transform: translateY(0%); }
+  to { transform: translateY(-50%); }
 }
+
+@keyframes scroll-reverse {
+  from { transform: translateY(-50%); }
+  to { transform: translateY(0%); }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes morph {
+  0%, 100% {
+    transform: rotate(0deg);
+    border-radius: 0;
+  }
+  25% {
+    transform: rotate(90deg);
+    border-radius: 25%;
+  }
+  50% {
+    transform: rotate(180deg);
+    border-radius: 50%;
+  }
+  75% {
+    transform: rotate(270deg);
+    border-radius: 25%;
+  }
+}
+
+@keyframes reveal {
+  from {
+    opacity: 0;
+    transform: translateY(100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes reveal-x {
+  from {
+    opacity: 0;
+    transform: translateY(100%) rotate(180deg) scale(0.5);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) rotate(0deg) scale(1);
+  }
+}
+
+@keyframes expand {
+  0% {
+    transform: scale(0.5);
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    transform: scale(2);
+    opacity: 0;
+  }
+}
+
